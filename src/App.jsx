@@ -6,6 +6,13 @@ const DEFAULT_EMAIL = "cristhianaguirre75@gmail.com";
 const normalizeSkillItem = (item) =>
   typeof item === "string" ? { label: item } : item;
 
+const resolveAssetUrl = (path) => {
+  if (!path) return path;
+  if (/^(https?:)?\/\//.test(path) || path.startsWith("data:")) return path;
+  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+};
+
 const toPercent = (value, maxValue) =>
   Math.round((value / maxValue) * 100);
 
@@ -68,7 +75,7 @@ export default function App() {
             <p className="eyebrow">{copy.hero.eyebrow}</p>
             {copy.hero.photo && (
               <div className="hero-photo-wrapper">
-                <img src={copy.hero.photo} alt={copy.hero.photoAlt} loading="lazy" />
+                <img src={resolveAssetUrl(copy.hero.photo)} alt={copy.hero.photoAlt} loading="lazy" />
               </div>
             )}
             <h1>{copy.hero.name}</h1>
@@ -101,7 +108,7 @@ export default function App() {
                     {entry.icon && (
                       <img
                         className="chip-icon"
-                        src={entry.icon}
+                        src={resolveAssetUrl(entry.icon)}
                         alt={`${entry.label} icon`}
                         loading="lazy"
                       />
@@ -202,7 +209,7 @@ export default function App() {
                             {entry.icon && (
                               <img
                                 className="chip-icon"
-                                src={entry.icon}
+                                src={resolveAssetUrl(entry.icon)}
                                 alt={`${entry.label} icon`}
                                 loading="lazy"
                               />
@@ -229,7 +236,7 @@ export default function App() {
             {copy.certifications.items.map((item) => (
               <article className="cert-card" key={item.title}>
                 <div className="cert-badge">
-                  <img src={item.badge} alt={item.badgeAlt} loading="lazy" />
+                  <img src={resolveAssetUrl(item.badge)} alt={item.badgeAlt} loading="lazy" />
                 </div>
                 <div className="cert-details">
                   <h3>{item.title}</h3>
