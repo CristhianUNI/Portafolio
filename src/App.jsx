@@ -1,13 +1,21 @@
 import React, { useMemo, useState } from "react";
 import { content } from "./content";
+import profileImage from "./assets/profile.jpeg";
+import terraformBadgeImage from "./assets/terraform-certified-associate.png";
 
 const DEFAULT_EMAIL = "cristhianaguirre75@gmail.com";
 
 const normalizeSkillItem = (item) =>
   typeof item === "string" ? { label: item } : item;
 
+const LOCAL_ASSETS = {
+  "/images/profile.jpeg": profileImage,
+  "/badges/terraform-certified-associate.png": terraformBadgeImage
+};
+
 const resolveAssetUrl = (path) => {
   if (!path) return path;
+  if (LOCAL_ASSETS[path]) return LOCAL_ASSETS[path];
   if (/^(https?:)?\/\//.test(path) || path.startsWith("data:")) return path;
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
   return `${import.meta.env.BASE_URL}${normalizedPath}`;
