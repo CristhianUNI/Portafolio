@@ -39,18 +39,19 @@ a {
   position: relative;
   min-height: 100vh;
   padding: 32px clamp(20px, 5vw, 70px) 48px;
-  overflow: hidden;
+  overflow-x: hidden;
   isolation: isolate;
 }
 
 .page::before,
 .page::after {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: auto;
   z-index: -1;
   border-radius: 50%;
   filter: blur(0px);
+  pointer-events: none;
 }
 
 .page::before {
@@ -628,50 +629,6 @@ main {
     flex-direction: column;
     align-items: flex-start;
   }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero,
-.focus,
-.skills,
-.certifications,
-.stack,
-.contact {
-  animation: fadeUp 0.7s ease both;
-}
-
-.hero {
-  animation-delay: 0.1s;
-}
-
-.focus {
-  animation-delay: 0.2s;
-}
-
-.skills {
-  animation-delay: 0.3s;
-}
-
-.certifications {
-  animation-delay: 0.4s;
-}
-
-.stack {
-  animation-delay: 0.5s;
-}
-
-.contact {
-  animation-delay: 0.6s;
 }
 
 @media (max-width: 700px) {
